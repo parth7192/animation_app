@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:animation_app/screens/drag_drop_animation/drag_drop_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,9 +8,9 @@ class DragDropAnimation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DragDropController mutable = Provider.of<DragDropController>(context);
-    DragDropController inmutable =
-        Provider.of<DragDropController>(context, listen: false);
+    DragController mutable = Provider.of<DragController>(context);
+    DragController inmutable =
+        Provider.of<DragController>(context, listen: false);
 
     return Scaffold(
       appBar: AppBar(
@@ -25,13 +26,15 @@ class DragDropAnimation extends StatelessWidget {
               children: [
                 LongPressDraggable(
                   data: 'box',
-                  childWhenDragging: Container(
-                    height: 200,
-                    width: 200,
-                  ),
                   feedback: Container(
                     height: 220,
                     width: 220,
+                    color: Colors.red,
+                  ),
+                  childWhenDragging: Container(
+                    height: 200,
+                    width: 200,
+                    color: Colors.grey,
                   ),
                   child: Container(
                     height: 200,
@@ -39,7 +42,49 @@ class DragDropAnimation extends StatelessWidget {
                     color: mutable.boxAccepted ? Colors.blue : Colors.red,
                   ),
                 ),
+                Draggable(
+                  data: 'circle',
+                  feedback: Container(
+                    height: 200,
+                    width: 200,
+                    decoration: const BoxDecoration(
+                      color: Colors.red,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                  childWhenDragging: Container(
+                    height: 200,
+                    width: 200,
+                    decoration: const BoxDecoration(
+                      color: Colors.grey,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                  child: Container(
+                    height: 200,
+                    width: 200,
+                    decoration: const BoxDecoration(
+                      color: Colors.red,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                ),
               ],
+            ),
+            DragTarget(
+              onAcceptWithDetails: (details) {
+                mutable.boxAccept();
+                log("Can accept...");
+              },
+              onWillAcceptWithDetails: (details) {
+                log("DATA: ${details.data}");
+                return details.data == 'box';
+              },
+              builder: (context, _, __) => Container(
+                height: 200,
+                width: 200,
+                color: mutable.boxAccepted ? Colors.red : Colors.grey,
+              ),
             ),
           ],
         ),

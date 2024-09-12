@@ -1,4 +1,5 @@
 import 'package:animation_app/screens/drag_drop_animation/drag_drop_animation.dart';
+import 'package:animation_app/screens/hero_animation/hero_animation.dart';
 import 'package:animation_app/screens/home_page/home_page.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -12,5 +13,6 @@ class AppRoutes {
   Map<String, WidgetBuilder> allRoutes = {
     '/': (Context) => const HomePage(),
     'drag_drop': (Context) => const DragDropAnimation(),
+    'hero': (Context) => const HeroAnimation(),
   };
 }

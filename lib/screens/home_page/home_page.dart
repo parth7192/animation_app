@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
                 "Drag & Drop",
                 style: TextStyle(color: Colors.black, fontSize: 30),
               ),
-            )
+            ),
           ],
         ),
       ),

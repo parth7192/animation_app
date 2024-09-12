@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class DragDropController extends ChangeNotifier {
+class DragController extends ChangeNotifier {
   bool boxAccepted = false;
 
   void boxAccept() {
