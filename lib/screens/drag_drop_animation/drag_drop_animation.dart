@@ -13,6 +13,7 @@ class DragDropAnimation extends StatelessWidget {
         Provider.of<DragController>(context, listen: false);
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         centerTitle: true,
         title: const Text("Drag & Drop Animation"),
